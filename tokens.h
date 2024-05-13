@@ -2,53 +2,51 @@
 #include <vector>
 #include <string.h>
 using namespace std;
-class Token{
+class Token {
     private:
         int ascii;
         string token;
         string symbol;
-
     public:
-        Token(int ascii, string token, string symbol){
+        Token(int ascii, string token, string symbol) {
             this->ascii = ascii;
             this->token = token;
             this->symbol = symbol;
         }
-        int getAscii(){
+        int getAscii() {
             return ascii;
         }
-        string getToken(){
+        string getToken() {
             return token;
         }
-        string getSymbol(){
+        string getSymbol() {
             return symbol;
         }
-        string toString(){
+        string toString() {
             return getToken() + " -> [" + getSymbol() + "]";
-                    
         }
         ~Token(){
             //destructor de token
         }
 };
-class ListaTokens{
+class ListaTokens {
     public:
     vector<Token> list;
-    void addToken(Token t){
+    void addToken(Token t) {
         list.push_back(t);
     }
-    bool contains(Token t){
-        for(int i = 0; i < (int)list.size(); i++){
-            if (list.at(i).getSymbol() == t.getSymbol()){
+    bool contains(Token t) {
+        for(int i = 0; i < (int)list.size(); i++) {
+            if (list.at(i).getSymbol() == t.getSymbol()) {
                return true;
             }
         }
         return false;
     }
-    int nToken(){
+    int nToken() {
         return (int) list.size();
     }
-    void llenarTokens(){
+    void llenarTokens() {
         //addToken(Token(0,"ID", ""));
         addToken(Token(0, "NONE", "none"));
         addToken(Token(0, "TRY", "try"));
