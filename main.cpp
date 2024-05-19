@@ -21,7 +21,7 @@ void addPalabra(string &palabra, vector<string> &palabras) {
 }
 vector<string> splitString(string str) {
     vector<string> palabras;
-    vector<char> caracteresEspeciales = {'*', '+', '-', '/', '%', '=', '#', '"', '&', '(', ')', '[', ']', '{', '}', '!', ';', ',', '<', '>', '^',' '};
+    vector<char> caracteresEspeciales = {'*', '+', '-', '/', '%', '=', '#', '"', '&', '(', ')', '[', ']', '{', '}', '!', ';', ',', '<', '>', '^',' ', '|', '&'};
     string palabra;
     bool dentroDeComillas = false;
     for (char c : str) {
@@ -40,6 +40,9 @@ vector<string> splitString(string str) {
             }
         } else
             if (c == '.') {
+                //aquí hay dos casos
+                //primero se evuala si es una constante númerica con un punto
+                //luego se evalua si es una variable llamando a un método 
                 if (!evaluarConstante(palabra)) {
                     addPalabra(palabra, palabras);
                     palabras.push_back(string(1,c));
@@ -77,6 +80,7 @@ void tokenizarLinea(string str, ListaTokens tokens, int linea) {
                 cout << Token(0, "CONSTANT", palabra).toString() << endl;
                 break;
             case 4:
+            //casos de error para cuando se encuentra un comilla doble pero no encuentra su par
                 cout << "\033[1;31mError en la linea " << linea << " missing character "<<"["<<palabra<<"]\033[0m" << endl;
                 break;
             default:
@@ -90,14 +94,14 @@ void tokenizar(string ruta) {
     ListaTokens tokens;
     tokens.llenarTokens();
     int numeroLinea = 1;
-    try{
+    try {
         fstream file(ruta);      
         while (!file.eof()) {
             string linea;
             getline(file, linea);
             tokenizarLinea(linea, tokens, numeroLinea++);
         }
-    }catch (const exception &e) {
+    } catch (const exception &e) {
         cout << e.what() << '\n';
     }
 }

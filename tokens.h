@@ -61,8 +61,6 @@ class ListaTokens {
         addToken(Token(0, "BREAK",  "break"));
         addToken(Token(0, "DO",  "do"));
         addToken(Token(0, "WHILE",  "while"));
-        addToken(Token(0, "ELSE",  "else"));
-        addToken(Token(0, "IF",  "if"));
         addToken(Token(0, "RETURN",  "return"));
         addToken(Token(0, "SCANF",  "scanf"));
         addToken(Token(0, "PRINTF",  "printf"));
